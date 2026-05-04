@@ -3,9 +3,13 @@ import numpy as np
 def generate_tornado(
     x_range=(-5, 5),
     y_range=(-5, 5),
-    z_values=[0.0],
-    strength=1.0       # 強さの係数
+    z_values=None,
+    strength=5.0       # 強さの係数
 ):
+    # z_valuesが指定されなければ0〜10で11層作る
+    if z_values is None:
+        z_values = list(range(0, 11))
+
     lines = []
 
     # ヘッダー
@@ -45,7 +49,7 @@ def generate_tornado(
 
 # ファイルに書き出す
 content = generate_tornado()
-with open("my_tornado.txt", "w") as f:
+with open("data/my_tornado.txt", "w") as f:
     f.write(content)
 
 print("生成完了!")
