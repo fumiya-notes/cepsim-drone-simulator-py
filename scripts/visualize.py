@@ -35,6 +35,14 @@ def visualize_wind(filepath, title="Wind Field"):
     ax.set_title(f"{title}\n({metadata.get('DataKind', '')})")
 
     plt.tight_layout()
+    
+    # 画像を保存
+    import os
+    os.makedirs("imgs", exist_ok=True)
+    filename = os.path.basename(filepath).replace(".txt", ".png")
+    plt.savefig(f"imgs/{filename}", dpi=150, bbox_inches='tight')
+    print(f"画像を保存しました: imgs/{filename}")
+    
     plt.show()
 
 def visualize_all(titles=None):
@@ -84,4 +92,11 @@ def visualize_all(titles=None):
     plt.show()
 
 if __name__ == "__main__":
+    # 個別可視化(画像保存つき)
+    visualize_wind("data/wind_updraft.txt", "上昇気流")
+    visualize_wind("data/wind_tornado.txt", "竜巻")
+    visualize_wind("data/wind_random.txt", "ランダムな風")
+    visualize_wind("data/my_tornado.txt", "自作竜巻")
+
+    # 4種類比較(これも保存つき)
     visualize_all()
